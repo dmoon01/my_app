@@ -1,0 +1,41 @@
+[1129/130257.047:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1130/130257.052:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1130/142403.159:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[1130/142403.160:ERROR:exception_snapshot_win.cc(99)] thread ID 18356 not found in process
+[1130/142403.160:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1130/165608.023:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[1130/165608.023:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1130/165608.023:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1130/170504.024:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[1130/170504.024:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1130/170504.024:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1130/173022.035:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[1130/173022.035:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1130/173022.035:ERROR:process_memory_win.cc(39)] Failed to initialize ProcessInfo.
+[1130/173022.035:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1130/181623.028:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[1130/181623.028:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1130/181623.028:ERROR:process_memory_win.cc(39)] Failed to initialize ProcessInfo.
+[1130/181623.028:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1130/191207.024:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[1130/191207.024:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1130/191207.024:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1130/192011.026:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[1130/192011.026:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1130/192011.026:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1130/193228.023:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[1130/193228.023:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1130/193228.023:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1130/200137.026:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[1130/200137.027:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1130/200137.027:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1130/200411.026:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[1130/200411.026:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1130/200411.026:ERROR:process_memory_win.cc(39)] Failed to initialize ProcessInfo.
+[1130/200411.026:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1130/203711.023:ERROR:process_info.cc(329)] VirtualQueryEx: Access is denied. (0x5)
+[1130/203711.023:ERROR:process_info.cc(556)] ReadMemoryInfo failed
+[1130/203711.023:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[1201/130257.054:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1202/130316.349:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1203/144318.969:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
