@@ -9,7 +9,7 @@ class NameField extends React.Component {
 
     handleChange(e) {
         const value = e.target.value;
-        this.props.valueChange('name', value);
+        this.props.validChange('name', value);
         this.nameValidCheck(value);
     }
 

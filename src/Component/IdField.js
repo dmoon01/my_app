@@ -10,7 +10,7 @@ class IdField extends React.Component{
 
     handleChange(e) {
         const value = e.target.value;
-        this.props.valueChange('id', value);
+        this.props.validChange('id', value);
         this.idValidCheck(value);
     }
 

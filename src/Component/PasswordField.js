@@ -19,7 +19,7 @@ class PasswordField extends React.Component{
 
     pwChange(e){
         const value = e.target.value;
-        this.props.valueChange('pw', value);
+        this.props.validChange('pw', value);
         this.pwValidCheck(value);
     }
 

@@ -9,7 +9,7 @@ class EmailField extends React.Component{
     }
     handleChange(e){
         const value = e.target.value;
-        this.props.valueChange('email', value);
+        this.props.validChange('email', value);
         this.emailValidCheck(value);
     }
 
