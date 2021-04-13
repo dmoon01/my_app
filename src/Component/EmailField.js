@@ -1,51 +1,44 @@
 import React from 'react';
 
-class EmailField extends React.Component{
-    constructor(props){
-        super(props);
-        this.handleChange=this.handleChange.bind(this);
-        this.emailValidCheck=this.emailValidCheck.bind(this);
-        this.renderEmailValidMessage=this.renderEmailValidMessage.bind(this);
-    }
-    handleChange(e){
+function EmailField(props){
+    
+    function handleChange(e){
         const value = e.target.value;
-        this.props.validChange('email', value);
-        this.emailValidCheck(value);
+        props.validChange(value);
+        emailValidCheck(value);
     }
 
-    emailValidCheck(input){
+    function emailValidCheck(input){
         if(input === ''){
-            this.props.validChange('emailValid', false);
+            props.valueChange(false);
         }else if((input.match('@') || []).length === 0){
-            this.props.validChange('emailValid', false);
+            props.valueChange(false);
         }else {
-            this.props.validChange('emailValid', true);
+            props.valueChange(true);
         }
     }
 
-    renderEmailValidMessage(input){
-        if((this.props.emailValid === false) && (this.props.email !=='')){
+    function renderEmailValidMessage(input){
+        if((props.emailValid === false) && (props.email !=='')){
             return(
                 <p> 
                     제대로된 이메일 형식을 입력해 주세요.
                 </p>
-            )
+            );
         }
     }
-    render(){
-        return (
+    return (
             <div>
                 <div>
                     <label>
-                        Email : <input type='text' value={this.props.email} onChange={this.handleChange} placeholder="이메일을 입력하세요."/>
+                        Email : <input type='text' value={props.email} onChange={handleChange} placeholder="이메일을 입력하세요."/>
                     </label>
                 </div>
                  <div>
-                     {this.renderEmailValidMessage()}
+                     {renderEmailValidMessage()}
                  </div>
             </div>
         )
-    };
 };
 
 export default EmailField;

@@ -1,37 +1,30 @@
 import React from 'react';
 
-class NameField extends React.Component {
-    constructor(props){
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.nameValidCheck = this.nameValidCheck.bind(this);
-    }
+function NameField(props) {
 
-    handleChange(e) {
+    function handleChange(e) {
         const value = e.target.value;
-        this.props.validChange('name', value);
-        this.nameValidCheck(value);
+        props.validChange(value);
+        nameValidCheck(value);
     }
 
-    nameValidCheck(input) {
+    function nameValidCheck(input) {
         if(input ===''){
-            this.props.validChange('nameValid', false);
+            props.valueChange(false);
         }else {
-            this.props.validChange('nameValid', true);
+            props.valueChange(true);
         }
     }
-
-    render() {
-        return (
+    return (
+        <div>
             <div>
-                <div>
-                    <label>
-                        Name : <input type='text' value={this.props.name} onChange={this.handleChange} placeholder="이름을 입력하세요."/>
-                    </label>
-                </div>
+                <label>
+                    Name : <input type='text' value={props.name} onChange={handleChange} placeholder="이름을 입력하세요."/>
+                </label>
             </div>
-        );
-    }
+        </div>
+    );
 }
+
 
 export default NameField;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import IdField from '../Component/IdField';
 import PasswordField from '../Component/PasswordField';
 import NameField from '../Component/NameField';
@@ -7,45 +7,37 @@ import Advertisement from '../Component/Advertisement';
 import EmailField from '../Component/EmailField';
 import { Link } from 'react-router-dom';
 import { signUp } from '../Actions/Form';
-import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-class Form extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            id : '',
-            pw : '',
-            name : '',
-            email : '',
-            phoneNumber : '',
-            allowAd : '',
-            joinTime : '',
-            idValid : false,
-            pwValid : false,
-            pwConfirmValid : null,
-            nameValid : false,
-            emailValid : false,
-        };
-        this.validChange = this.validChange.bind(this);
-        this.onSubmit=this.onSubmit.bind(this);
-    }
+function Form (props){
+    const [id, setId] = useState('');
+    const [pw, setPw] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState ('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [allowAd, setAllowAd] = useState('');
+    const [idValid, setIdValid] = useState(false);
+    const [confirmId, setConfirmId] = useState(false);
+    const [pwValid, setPwValid] = useState(false);
+    const [pwConfirmValid, setPwConfirmValid] = useState(null);
+    const [nameValid, setNameValid] = useState (false);
+    const [emailValid, setEmailValid] = useState(false);  
+    const submitValid = idValid&&pwValid&&nameValid&&emailValid;
+    const history = useHistory();
+    const dispatch = useDispatch();
 
-    validChange(key, value){
-        this.setState({[key] : value});
-    }
-
-    onSubmit(e){
+    function onSubmit(e){
         e.preventDefault();
         const d = new Date();
         const data = {
-            "id" : this.state.id,
-            "password" : this.state.pw,
-            "name" : this.state.name,
-            "phoneAddress" : this.state.phoneNumber,
-            "emailAddress" : this.state.email,
-            "advertisement" : this.state.allowAd
+            "id" : id,
+            "password" : pw,
+            "name" : name,
+            "phoneAddress" : phoneNumber,
+            "emailAddress" : email,
+            "advertisement" : allowAd
         }
-
         fetch('http://ec2-18-188-80-186.us-east-2.compute.amazonaws.com:3000/signup/', {
             method : "POST",
             headers : {'Content-Type' : 'application/json'},
@@ -53,55 +45,37 @@ class Form extends React.Component {
         })
         .then(response => {
             console.log(response.status);
-            if(response.ok) {
-                this.validChange('joinTime', d.toLocaleString());
-                this.props.signUp(this.state);
-                this.props.history.push("/welcome");
+            if(response.status === 400) {
+                alert("Please go back!👽");
+                return;
             }
-            else if(response.status === 400) {
-                alert("Please go back!👽")
+            else if(!response.ok){
+                alert("서버 오류로 회원가입에 실패하였습니다");    
+                return;
             }
-            else {alert("서버 오류로 회원가입에 실패하였습니다");};
-        });
+            dispatch(signUp({name : name, id : id, email : email, joinTime : d.toLocaleString()}));
+            history.push("/welcome"); 
+            })
     }
-
-    render(){
-        const submitValid = this.state.idValid&&this.state.pwValid&&this.state.nameValid&&this.state.emailValid;
-        return(
+        return (
             <div>
                 <div>
                     <h1>About You</h1>
                 </div>
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <div>
-                     <IdField confirmId={this.state.confirmId} id={this.state.id} idValid={this.state.idValid} validChange = {this.validChange} />
-                     <PasswordField pw={this.state.pw} pwValid={this.state.pwValid} pwConfirmValid={this.state.pwConfirmValid} validChange = {this.validChange}/>
-                     <NameField name={this.state.name} nameValid={this.state.nameValid} validChange = {this.validChange} />
-                     <PhoneNumberField phoneNumber={this.state.phoneNumber} validChange = {this.validChange} />
-                     <EmailField email={this.state.email} emailValid={this.state.emailValid} validChange = {this.validChange} />
-                     <Advertisement allowAd={this.state.allowAd} validChange={this.validChange}/>
+                     <IdField confirmId={confirmId} id={id} idValid={idValid} validChange = {setId} valueChange ={setIdValid} confirmIdChange = {setConfirmId}/>
+                     <PasswordField pw={pw} pwValid={pwValid} pwConfirmValid={pwConfirmValid} validChange = {setPw} valueChange ={setPwValid} confirmPwChange={setPwConfirmValid}/>
+                     <NameField name={name} nameValid={nameValid} validChange = {setName} valueChange ={setNameValid}/>
+                     <PhoneNumberField phoneNumber={phoneNumber} validChange = {setPhoneNumber} />
+                     <EmailField email={email} emailValid={emailValid} validChange = {setEmail} valueChange={setEmailValid}/>
+                     <Advertisement allowAd={allowAd} validChange={setAllowAd}/>
                     </div>
-                <Link to="/welcome"><input type='submit' value='Join' disabled={!submitValid} onClick={this.onSubmit}/></Link>
+                <Link to="/welcome"><input type='submit' value='Join' disabled={!submitValid} onClick={onSubmit}/></Link>
                 </form>
             </div>
-            );
-        }
+        )
     }
 
-const mapStateToProps = state => ({
-    id : state.form.id, 
-    pw : state.form.pw,
-    name : state.form.name,
-    email : state.form.email,
-    phoneNumber : state.form.phoneNumber,
-    allowAd : state.form.allowAd,
-    joinTime : state.form.joinTime
-});
 
-const mapDispatchToProps = dispatch => ({
-    signUp : (userInformation) => {
-        dispatch(signUp(userInformation));
-    }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default Form;

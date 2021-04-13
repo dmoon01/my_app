@@ -1,52 +1,40 @@
 // function component로 바꾸기. 바꾸면서 useState with Hooks
 //const[pwd, setPwd] = useState('');
 //const[isRevealPwd, setIsRevealPwd] =useState(false);
-import React from 'react';
+import React, { useState } from 'react';
 
-class PasswordField extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            hidden: true
-        };
-        this.pwChange=this.pwChange.bind(this);
-        this.pwValidCheck=this.pwValidCheck.bind(this);
-        this.pwConfirmValidCheck=this.pwConfirmValidCheck.bind(this);
-        this.renderValidMessage=this.renderValidMessage.bind(this);
-        this.renderPwValidMessage=this.renderPwValidMessage.bind(this);
-        this.toggleShow=this.toggleShow.bind(this);
-    }
-
-    pwChange(e){
+function PasswordField(props){
+    const [hidden,setHidden] = useState(true);
+    
+    function pwChange(e){
         const value = e.target.value;
-        this.props.validChange('pw', value);
-        this.pwValidCheck(value);
+        props.validChange(value);
+        pwValidCheck(value);
     }
 
-    pwValidCheck(input){
+    function pwValidCheck(input){
         if(input===''){
-            this.props.validChange('pwValid', false);
+            props.valueChange(false);
         }else if (input.length < 8) {
-            this.props.validChange('pwValid', false);
+            props.valueChange(false);
         }else {
-            this.props.validChange('pwValid', true);
+            props.valueChange(true);
         }
     }
 
-
-    pwConfirmValidCheck(e){
+    function pwConfirmValidCheck(e){
         const value = e.target.value;
         if(value === '') {
-            this.props.validChange('pwConfirmValid', null);
-        } else if(value === this.props.pw){
-            this.props.validChange('pwConfirmValid', true);
+            props.valuehange(null);
+        } else if(value === props.pw){
+            props.valueChange(true);
         } else {
-            this.props.validChange('pwConfirmValid', false);
+            props.valueChange(false);
         }
     }
 
 
-    renderValidMessage(value, valid){
+    function renderValidMessage(value, valid){
         if(value !== ''){
             if(valid === true) {
                 return('✔️');
@@ -56,43 +44,43 @@ class PasswordField extends React.Component{
         }
     }
 
-    renderPwValidMessage(){
-        if(this.props.pwConfirmValid !== null) {
-                if(this.props.pwConfirmValid === true) {
-                    return('✔️');
-                }else { 
-                    return('❎');
-                }
+    function renderPwValidMessage(){
+        if(props.pwConfirmValid !== null) {
+             if(props.pwConfirmValid === true) {
+                return('✔️');
+            }   else { 
+                 return('❎');
             }
         }
-    toggleShow(e){
-        e.preventDefault();
-        this.setState({hidden: !this.state.hidden});
     }
-    render(){
+
+    function toggleShow(e){
+        e.preventDefault();
+        setHidden({hidden: !hidden});
+    }
+    
         return(
             <div>
                 <div>
                     <label>
-                        Password : <input type = {this.state.hidden ? 'password' :'text'} value={this.props.pw} onChange={this.pwChange} placeholder="비밀번호를 입력하세요." />
-                        <button onClick={this.toggleShow}>👀</button>
+                        Password : <input type = {hidden ? 'password' :'text'} value={props.pw} onChange={pwChange} placeholder="비밀번호를 입력하세요." />
+                        <button onClick={toggleShow}>👀</button>
                     </label>
                 </div>
                 <div>
-                    {this.renderValidMessage(this.props.pw, this.props.pwValid)}
+                    {renderValidMessage(props.pw, props.pwValid)}
                 </div>
                 <div>
                     <label>
-                        Password Confirmation : <input type = {this.state.hidden ? 'password' :'text'} onChange={this.pwConfirmValidCheck} placeholder="비밀번호를 재입력하세요."/>
-                        <button onClick={this.toggleShow}>👀</button>
+                        Password Confirmation : <input type = {hidden ? 'password' :'text'} onChange={pwConfirmValidCheck} placeholder="비밀번호를 재입력하세요."/>
+                        <button onClick={toggleShow}>👀</button>
                     </label>           
                 </div>
                 <div>
-                    {this.renderPwValidMessage()}
+                    {renderPwValidMessage(props.pwConfirmValid, props.pwConfirmValidCheck)}
                 </div>
             </div>
         );
-    }
 }
 
 export default PasswordField;
